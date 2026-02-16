@@ -26,13 +26,13 @@ function extractSetCookie(res: Response): string | null {
     .join("; ");
 }
 
-export async function serverFetch<T>(
+export async function serverFetch(
   path: string,
   options?: {
     params?: Record<string, any>;
     revalidate?: number;
   }
-): Promise<T> {
+): Promise<any> {
   const { params, revalidate = 60 } = options || {};
 
   const query = params
