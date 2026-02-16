@@ -29,6 +29,10 @@
   transition: 0.2s;
 }
 
+.box.active {
+  background: rgba(2, 150, 255, 0.15);
+}
+
 .box:hover {
   transform: translateY(-2px);
 }

@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { FaStar } from "react-icons/fa";
 import SectionTitle from "@/components/common/titles/SectionTitle";
-import { getCategoryNewsPosts } from "@/lib/requests";
+import { getCategoryNewsPosts } from "@/lib/requests-server";
 import styles from "./ReviewsGrid.module.css";
 
 /* ================= TYPES ================= */

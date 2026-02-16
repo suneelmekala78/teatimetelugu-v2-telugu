@@ -4,7 +4,7 @@ import { useEffect, useRef, useState } from "react";
 import styles from "./ReadButton.module.css";
 import { toast } from "sonner";
 import { FaPlay, FaPause, FaStop, FaVolumeUp } from "react-icons/fa";
-import { getSpeech } from "@/lib/requests";
+// import { getSpeech } from "@/lib/requests-server";
 
 /* ---------------- types ---------------- */
 
@@ -63,14 +63,14 @@ export default function ReadButton({ news }: Props) {
       if (!audioUrl) {
         let base64 = news.newsAudio?.te;
 
-        if (!base64) {
-          const res = await getSpeech({
-            newsId: news._id,
-            text: `<p>శీర్షిక: ${news.title.te}</p>${news.description.en}`,
-          });
+        // if (!base64) {
+        //   const res = await getSpeech({
+        //     newsId: news._id,
+        //     text: `<p>శీర్షిక: ${news.title.te}</p>${news.description.en}`,
+        //   });
 
-          base64 = res?.audioContent;
-        }
+        //   base64 = res?.audioContent;
+        // }
 
         if (!base64) {
           toast.error("Audio unavailable");

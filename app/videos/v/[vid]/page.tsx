@@ -1,4 +1,4 @@
-import { getVideo } from "@/lib/requests";
+import { getVideo } from "@/lib/requests-server";
 import VideoView from "./VideoView";
 
 type Props = {

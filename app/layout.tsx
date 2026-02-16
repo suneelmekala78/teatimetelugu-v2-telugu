@@ -5,6 +5,8 @@ import "./globals.css";
 import Navbar from "@/components/common/navbar/Navbar";
 import Footer from "@/components/common/footer/Footer";
 import NetworkProvider from "@/components/providers/NetworkProvider";
+import { getServerUser } from "@/lib/server/session";
+import HydrateUser from "@/components/providers/HydrateUser";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -18,20 +20,23 @@ export const metadata: Metadata = {
     "తెలుగు మాట్లాడే ప్రేక్షకుల కోసం తాజా వార్తలు, సినిమా అప్‌డేట్స్, గాసిప్స్ మరియు వినోదం. బ్రేకింగ్ న్యూస్, సినిమా సమీక్షలు, OTT రిలీజ్ అప్‌డేట్స్, రాజకీయ విశ్లేషణలు మరియు స్టార్‌ల ఇంటర్వ్యూలతో ప్రత్యేకంగా అందించే ప్లాట్‌ఫార్మ్.",
 };
 
-export default function RootLayout({
+export default async function RootLayout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const user = await getServerUser(); // runs on server
   return (
     <html lang="te">
       <body className={`${geistSans.variable} antialiased`}>
         <Toaster position="top-center" richColors />
+        <HydrateUser user={user}>
         <div className="page-container">
           <Navbar />
           <NetworkProvider>{children}</NetworkProvider>
           <Footer />
         </div>
+        </HydrateUser>
       </body>
     </html>
   );

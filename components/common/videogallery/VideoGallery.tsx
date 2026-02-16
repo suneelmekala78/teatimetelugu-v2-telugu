@@ -1,4 +1,4 @@
-import { getFilteredVideos } from "@/lib/requests";
+import { getFilteredVideos } from "@/lib/requests-server";
 import VideoGalleryClient from "./VideoGalleryClient";
 
 /* ================= TYPES ================= */

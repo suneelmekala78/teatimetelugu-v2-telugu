@@ -1,5 +1,5 @@
 import SectionTitle from "@/components/common/titles/SectionTitle";
-import { getHotTopics } from "@/lib/requests";
+import { getHotTopics } from "@/lib/requests-server";
 import ScrollCarousel from "./ScrollCarousel";
 import styles from "./ScrollGrid.module.css";
 

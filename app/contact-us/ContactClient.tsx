@@ -11,7 +11,7 @@ import {
   FaXTwitter,
 } from "react-icons/fa6";
 
-import { contactUsEmail } from "@/lib/requests";
+import { contactUsEmail } from "@/lib/requests-client";
 import { toast } from "react-toastify";
 import styles from "./contact.module.css";
 

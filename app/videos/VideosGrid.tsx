@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./Videos.module.css";
-import { getFilteredVideos } from "@/lib/requests";
+import { getFilteredVideos } from "@/lib/requests-server";
 import { FaAngleLeft, FaAngleRight, FaPlay } from "react-icons/fa";
 
 const POSTS_PER_PAGE = 16;

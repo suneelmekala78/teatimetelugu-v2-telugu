@@ -1,5 +1,6 @@
-import { getSingleNews } from "@/lib/requests";
+import { getSingleNews } from "@/lib/requests-server";
 import NewsView from "./NewsView";
+import HydrateReactions from "@/components/providers/HydrateReactions";
 
 type Props = {
   params: Promise<{
@@ -18,7 +19,7 @@ export async function generateMetadata({ params }: Props) {
     if (res?.status === "success") {
       return {
         title: res.news?.title?.te,
-        description: res.news?.title?.te,
+        description: res.news?.description?.te?.text,
         openGraph: {
           images: [res.news?.mainUrl],
         },
@@ -47,5 +48,9 @@ export default async function Page({ params }: Props) {
 
   if (!news) return <p style={{ padding: 40 }}>Not found</p>;
 
-  return <NewsView news={news} suggested={suggested} />;
+  return (
+    <HydrateReactions reactions={news.reactions || []}>
+      <NewsView news={news} suggested={suggested} />
+    </HydrateReactions>
+  );
 }

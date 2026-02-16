@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./VideoGrid.module.css";
-import { getFilteredVideos } from "@/lib/requests";
+import { getFilteredVideos } from "@/lib/requests-server";
 import SectionTitle from "@/components/common/titles/SectionTitle";
 
 interface Props {

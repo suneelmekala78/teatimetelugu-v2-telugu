@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import SectionTitle from "@/components/common/titles/SectionTitle";
 import styles from "./TopNews.module.css";
-import { getCategoryTopPosts } from "@/lib/requests";
+import { getCategoryTopPosts } from "@/lib/requests-server";
 
 interface Props {
   category: string;

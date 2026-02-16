@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import SectionTitle from "@/components/common/titles/SectionTitle";
-import { getTrendingNews } from "@/lib/requests";
+import { getTrendingNews } from "@/lib/requests-server";
 import styles from "./TrendingGrid.module.css";
 
 /* ================= TYPES ================= */

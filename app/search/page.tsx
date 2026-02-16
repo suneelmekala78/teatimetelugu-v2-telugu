@@ -1,4 +1,4 @@
-import { getSearchNews } from "@/lib/requests";
+import { getSearchNews } from "@/lib/requests-server";
 
 import SearchBar from "@/components/search/SearchBar";
 import SearchGrid from "@/components/search/SearchGrid";

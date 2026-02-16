@@ -3,9 +3,11 @@
 import styles from "./Reactions.module.css";
 import Image from "next/image";
 import { toast } from "sonner";
+import { startTransition } from "react";
+import { useRouter } from "next/navigation";
 
 import { useUserStore } from "@/store/useUserStore";
-import { addNewsReaction, addGalleryReaction } from "@/lib/requests";
+import { addNewsReaction, addGalleryReaction } from "@/lib/requests-client";
 
 /* ---------------- types ---------------- */
 
@@ -28,7 +30,9 @@ const REACTIONS = [
 /* ---------------- component ---------------- */
 
 export default function Reactions({ newsId, isGallery }: Props) {
-  const { user, reactions, addReaction } = useUserStore();
+  const router = useRouter();
+
+  const { user, reactions, addReaction, removeReaction } = useUserStore();
 
   const handleReact = async (type: string) => {
     if (!user) {
@@ -38,14 +42,28 @@ export default function Reactions({ newsId, isGallery }: Props) {
 
     const apiCall = isGallery ? addGalleryReaction : addNewsReaction;
 
-    const res = await apiCall(newsId, {
+    /* optimistic update */
+    addReaction({
       userId: user._id,
       type,
+      _id: "temp",
     });
 
-    if (res?.status === "success") {
-      addReaction({ userId: user._id, type, _id: res.reactionId });
+    try {
+      await apiCall(newsId, {
+        userId: user._id,
+        type,
+      });
+    } catch {
+      removeReaction({ userId: user._id });
+      toast.error("Failed to react");
+      return;
     }
+
+    /* soft refresh to sync counts */
+    startTransition(() => {
+      router.refresh();
+    });
   };
 
   const total = reactions.length;
@@ -61,10 +79,14 @@ export default function Reactions({ newsId, isGallery }: Props) {
           const count = reactions.filter((x) => x.type === r.type).length;
           const percent = total ? Math.round((count / total) * 100) : 0;
 
+          const isSelected = reactions.find(
+            (x) => x.userId === user?._id && x.type === r.type,
+          );
+
           return (
             <button
               key={r.type}
-              className={styles.box}
+              className={`${styles.box} ${isSelected ? styles.active : ""}`}
               onClick={() => handleReact(r.type)}
             >
               <Image src={r.img} alt={r.type} width={40} height={40} />

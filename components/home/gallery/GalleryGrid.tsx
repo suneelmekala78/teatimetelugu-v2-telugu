@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import SectionTitle from "@/components/common/titles/SectionTitle";
-import { getFilteredGallery } from "@/lib/requests";
+import { getFilteredGallery } from "@/lib/requests-server";
 import styles from "./GalleryGrid.module.css";
 
 /* ================= TYPES ================= */

@@ -1,12 +1,12 @@
 import Image from "next/image";
 import styles from "./GalleryView.module.css";
-import Comments from "@/components/news/comments/Comments";
 import LatestStories from "@/components/common/lateststories/LatestStories";
 import Social from "@/components/news/social/Social";
 import GalleryPopup from "./GalleryPopup";
 import Reactions from "@/components/news/reactions/Reactions";
 import SuggestedGallery from "@/components/news/suggestedgallery/SuggestedGallery";
 import { FaCalendarAlt } from "react-icons/fa";
+import CommentsServer from "@/components/news/comments/CommentsServer";
 
 type Props = {
   gallery: any;
@@ -67,8 +67,8 @@ export default function GalleryView({ gallery, suggested }: Props) {
           ))}
         </div>
 
-        <Reactions newsId={gallery._id} />
-        <Comments newsId={gallery._id} />
+        <Reactions newsId={gallery._id} isGallery={true} />
+        <CommentsServer newsId={gallery._id} />
         <SuggestedGallery items={suggested} />
       </div>
 

@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./CategoryPosts.module.css";
-import { getCategoryNewsPosts } from "@/lib/requests";
+import { getCategoryNewsPosts } from "@/lib/requests-server";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
 
 const POSTS_PER_PAGE = 16;

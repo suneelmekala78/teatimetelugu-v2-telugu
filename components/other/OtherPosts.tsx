@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import SectionTitle from "@/components/common/titles/SectionTitle";
-import { getFilteredNews } from "@/lib/requests";
+import { getFilteredNews } from "@/lib/requests-server";
 import styles from "./OtherPosts.module.css";
 
 /* ================= TYPES ================= */

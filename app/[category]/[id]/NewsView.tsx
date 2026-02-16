@@ -1,7 +1,6 @@
 import Image from "next/image";
 import Link from "next/link";
 import styles from "./NewsView.module.css";
-import Comments from "@/components/news/comments/Comments";
 import Reactions from "@/components/news/reactions/Reactions";
 import { FaCalendarAlt } from "react-icons/fa";
 
@@ -10,6 +9,7 @@ import ReadButton from "@/components/news/readbutton/ReadButton";
 import Social from "@/components/news/social/Social";
 import Tags from "@/components/news/tags/Tags";
 import SuggestedNews from "@/components/news/suggestednews/SuggestedNews";
+import CommentsServer from "@/components/news/comments/CommentsServer";
 
 type Props = {
   news: any;
@@ -64,8 +64,8 @@ export default function NewsView({ news, suggested }: Props) {
           }}
         />
 
-        <Reactions newsId={news._id} />
-        <Comments newsId={news._id} />
+        <Reactions newsId={news._id} isGallery={false} />
+        <CommentsServer newsId={news._id} />
         <SuggestedNews items={suggested} />
       </div>
 

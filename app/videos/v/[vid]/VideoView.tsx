@@ -37,7 +37,9 @@ export default function VideoView({ video, suggested, similar }: Props) {
           {video?.title?.te}
         </h1>
 
-        <p className={styles.date}><FaCalendarAlt /> {formattedDate}</p>
+        <p className={styles.date}>
+          <FaCalendarAlt /> {formattedDate}
+        </p>
 
         {/* VIDEO */}
         <div className={styles.player}>

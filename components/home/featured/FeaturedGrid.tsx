@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import SectionTitle from "@/components/common/titles/SectionTitle";
-import { getLatestNews } from "@/lib/requests";
+import { getLatestNews } from "@/lib/requests-server";
 import styles from "./FeaturedGrid.module.css";
 
 /* ================= TYPES ================= */

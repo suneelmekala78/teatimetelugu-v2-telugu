@@ -3,7 +3,7 @@
 import { useEffect, useState, FormEvent } from "react";
 import Link from "next/link";
 import Image from "next/image";
-import { usePathname, useRouter } from "next/navigation";
+import { usePathname, useSearchParams, useRouter } from "next/navigation";
 import { toast } from "sonner";
 
 import {
@@ -42,6 +42,7 @@ const NAV_ITEMS = [
 
 export default function Navbar() {
   const pathname = usePathname();
+  const searchParams = useSearchParams();
   const router = useRouter();
 
   const user = useUserStore((s) => s.user);
@@ -56,6 +57,12 @@ export default function Navbar() {
   const [isJoin, setIsJoin] = useState(false);
 
   const isActive = (path: string) => pathname === path;
+
+  /* keep query params if present */
+  const query = searchParams.toString();
+  const fullPath = query ? `${pathname}?${query}` : pathname;
+
+  const redirectUrl = `${process.env.NEXT_PUBLIC_REDIRECT_URL}${fullPath}`;
 
   /* ---------- SCROLL EFFECT ---------- */
   useEffect(() => {
@@ -113,9 +120,9 @@ export default function Navbar() {
             </span>
 
             <div className={styles.topLinks}>
-              <Link href={"/about"}>మన గురించి</Link>
-              <Link href={"/contact"}>సంప్రదించండి</Link>
-              <Link href={"/privacy"}>గోప్యతా విధానం</Link>
+              <Link href={"/about-us"}>మన గురించి</Link>
+              <Link href={"/contact-us"}>సంప్రదించండి</Link>
+              <Link href={"/privacy-policy"}>గోప్యతా విధానం</Link>
             </div>
           </div>
 
@@ -176,13 +183,13 @@ export default function Navbar() {
             </Link>
 
             <a
-              href="https://en.teatimetelugu.com"
+              href={redirectUrl}
               target="_blank"
               rel="noopener noreferrer"
               className={styles.langBtn}
             >
               ENGLISH
-            </a>
+            </a> 
 
             {user ? (
               <button
@@ -301,7 +308,6 @@ export default function Navbar() {
       <AuthPopup
         open={isJoin}
         onClose={() => setIsJoin(false)}
-        // pathname={window.location.pathname}
       />
 
       {/* Logout Confirmation Modal */}

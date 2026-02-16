@@ -15,13 +15,13 @@ import {
 
 import { useUserStore } from "@/store/useUserStore";
 import {
-  getNewsComments,
   addNewsComment,
   addNewsReplyComment,
   likeNewsComment,
   dislikeNewsComment,
   deleteNewsComment,
-} from "@/lib/requests";
+} from "@/lib/requests-client";
+import { getNewsComments } from "@/lib/requests-server";
 
 /* ---------------- types ---------------- */
 
@@ -135,73 +135,146 @@ export default function Comments({ newsId }: Props) {
       {/* List */}
       {direct.map((c) => (
         <div key={c._id} className={styles.comment}>
-          <div className={styles.header}>
-            <b>{c.postedBy?.fullName}</b>
-            <span>{moment(c.createdAt).fromNow()}</span>
-          </div>
-
-          <p>{c.comment}</p>
-
-          {/* actions */}
-          <div className={styles.actions}>
-            <button
-              className={`${styles.iconBtn} ${
-                c.likes?.includes(user?._id) ? styles.active : ""
-              }`}
-              onClick={() => like(c._id)}
-            >
-              <FaThumbsUp /> {c.likes?.length || 0}
-            </button>
-
-            <button
-              className={`${styles.iconBtn} ${
-                c.dislikes?.includes(user?._id) ? styles.activeRed : ""
-              }`}
-              onClick={() => dislike(c._id)}
-            >
-              <FaThumbsDown /> {c.dislikes?.length || 0}
-            </button>
-
-            <button
-              className={styles.iconBtn}
-              onClick={() => setReplyBox(c._id)}
-            >
-              <FaReply /> Reply
-            </button>
-
-            {user?._id === c.postedBy?._id && (
-              <button
-                className={`${styles.iconBtn} ${styles.delete}`}
-                onClick={() => remove(c._id)}
-              >
-                <FaTrash />
-              </button>
+          {/* Avatar */}
+          <div className={styles.avatar}>
+            {c.postedBy?.profileUrl ? (
+              <img src={c.postedBy.profileUrl} alt="user" />
+            ) : (
+              <span>{c.postedBy?.fullName?.charAt(0)?.toUpperCase()}</span>
             )}
           </div>
 
-          {/* reply box */}
-          {replyBox === c._id && (
-            <div className={styles.replyBox}>
-              <textarea
-                className={styles.textarea}
-                value={replyText}
-                onChange={(e) => setReplyText(e.target.value)}
-              />
-              <button
-                className={styles.primaryBtn}
-                onClick={() => submitReply(c._id)}
-              >
-                Reply
-              </button>
+          {/* Body */}
+          <div className={styles.body}>
+            <div className={styles.header}>
+              <span className={styles.name}>{c.postedBy?.fullName}</span>
+              <span className={styles.time}>
+                {moment(c.createdAt).fromNow()}
+              </span>
             </div>
-          )}
 
-          {/* replies */}
-          {replies(c._id).map((r) => (
-            <div key={r._id} className={styles.reply}>
-              <b>{r.postedBy?.fullName}</b> — {r.comment}
+            <p className={styles.text}>{c.comment}</p>
+
+            {/* actions */}
+            <div className={styles.actions}>
+              <button
+                className={`${styles.actionBtn} ${
+                  c.likes?.includes(user?._id) ? styles.liked : ""
+                }`}
+                onClick={() => like(c._id)}
+              >
+                <FaThumbsUp /> {c.likes?.length || 0}
+              </button>
+
+              <button
+                className={`${styles.actionBtn} ${
+                  c.dislikes?.includes(user?._id) ? styles.disliked : ""
+                }`}
+                onClick={() => dislike(c._id)}
+              >
+                <FaThumbsDown /> {c.dislikes?.length || 0}
+              </button>
+
+              <button
+                className={styles.replyBtn}
+                onClick={() => setReplyBox(c._id)}
+              >
+                <FaReply /> రిప్లై{" "}
+                {c.replies.length > 0 && `(${c.replies.length})`}
+              </button>
+
+              {user?._id === c.postedBy?._id && (
+                <button
+                  className={styles.deleteBtn}
+                  onClick={() => remove(c._id)}
+                >
+                  <FaTrash />
+                </button>
+              )}
             </div>
-          ))}
+
+            {/* reply box */}
+            {replyBox === c._id && (
+              <div className={styles.replyBox}>
+                <textarea
+                  className={styles.textarea}
+                  placeholder="మీ స్పందన రాయండి..."
+                  value={replyText}
+                  onChange={(e) => setReplyText(e.target.value)}
+                />
+                <button
+                  className={styles.primaryBtn}
+                  onClick={() => submitReply(c._id)}
+                >
+                  Reply
+                </button>
+              </div>
+            )}
+
+            {/* replies */}
+            {replyBox === c._id && c.replies?.length > 0 && (
+              <div className={styles.replies}>
+                {c.replies.map((r: any) => (
+                  <div key={r._id} className={styles.reply}>
+                    <div className={styles.replyAvatar}>
+                      {r.postedBy?.profileUrl ? (
+                        <img src={r.postedBy.profileUrl} alt="user" />
+                      ) : (
+                        <span>
+                          {r.postedBy?.fullName?.charAt(0)?.toUpperCase()}
+                        </span>
+                      )}
+                    </div>
+
+                    <div className={styles.replyContent}>
+                      <div className={styles.header}>
+                        <span className={styles.name}>
+                          {r.postedBy?.fullName}
+                        </span>
+                        <span className={styles.time}>
+                          {moment(r.createdAt).fromNow()}
+                        </span>
+                      </div>
+
+                      <p>{r.comment}</p>
+
+                      {/* reply actions */}
+                      <div className={styles.actions}>
+                        <button
+                          className={`${styles.actionBtn} ${
+                            r.likes?.includes(user?._id) ? styles.liked : ""
+                          }`}
+                          onClick={() => like(r._id)}
+                        >
+                          <FaThumbsUp /> {r.likes?.length || 0}
+                        </button>
+
+                        <button
+                          className={`${styles.actionBtn} ${
+                            r.dislikes?.includes(user?._id)
+                              ? styles.disliked
+                              : ""
+                          }`}
+                          onClick={() => dislike(r._id)}
+                        >
+                          <FaThumbsDown /> {r.dislikes?.length || 0}
+                        </button>
+
+                        {user?._id === r.postedBy?._id && (
+                          <button
+                            className={styles.deleteBtn}
+                            onClick={() => remove(r._id)}
+                          >
+                            <FaTrash />
+                          </button>
+                        )}
+                      </div>
+                    </div>
+                  </div>
+                ))}
+              </div>
+            )}
+          </div> 
         </div>
       ))}
     </div>

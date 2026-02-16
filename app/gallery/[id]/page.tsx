@@ -1,4 +1,4 @@
-import { getSingleGallery } from "@/lib/requests";
+import { getSingleGallery } from "@/lib/requests-server";
 import GalleryView from "./GalleryView";
 
 type Props = {
@@ -15,7 +15,7 @@ export async function generateMetadata({ params }: Props) {
     if (res?.status === "success") {
       return {
         title: res.gallery?.title?.te,
-        description: res.gallery?.title?.te,
+        description: res.gallery?.description?.te?.text,
         openGraph: {
           images: [res.gallery?.galleryPics?.[0]],
         },

@@ -1,5 +1,5 @@
 import MovieTabsTableClient from "./MovieTabsTableClient";
-import { getMovieReleases } from "@/lib/requests";
+import { getMovieReleases } from "@/lib/requests-server";
 
 export default async function MovieSchedules() {
   let rows: any[] = [];

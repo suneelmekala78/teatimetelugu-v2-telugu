@@ -2,7 +2,7 @@ import Link from "next/link";
 import Image from "next/image";
 import TabTitle from "@/components/common/titles/TabTitle";
 import styles from "./Gallery.module.css";
-import { getFilteredGallery } from "@/lib/requests";
+import { getFilteredGallery } from "@/lib/requests-server";
 import { time } from "console";
 import GalleryTabs from "./GalleryTabs";
 import { FaAngleLeft } from "react-icons/fa6";

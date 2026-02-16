@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import styles from "./BreakingNews.module.css";
-import { getBreakingNews } from "@/lib/requests";
+import { getBreakingNews } from "@/lib/requests-server";
 
 export default async function BreakingNews() {
   let news: any[] = [];
