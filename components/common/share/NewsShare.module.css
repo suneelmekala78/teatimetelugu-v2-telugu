@@ -1,0 +1,46 @@
+.shareIcons {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  flex-wrap: wrap;
+}
+
+.iconBtn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  height: 30px;
+  padding: 0 8px;
+  border: none;
+  border-radius: 6px;
+  font-size: 16px;
+  color: #fff;
+  cursor: pointer;
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.iconBtn:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 14px rgba(0,0,0,0.18);
+}
+
+/* Brand Colors */
+.facebook { background: #1877f2; }
+.whatsapp { background: #25d366; }
+.instagram {
+  background: linear-gradient(45deg,#f58529,#dd2a7b,#8134af,#515bd4);
+}
+.twitter { background: #000; }
+.share { background: #ff6b00; }
+
+.iconBtn svg {
+  font-size: 18px;
+}
+
+@media (max-width: 450px) {
+    .shareIcons {
+        width: 100%;
+        justify-content: right;
+    }
+}

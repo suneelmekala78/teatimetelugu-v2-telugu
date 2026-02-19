@@ -212,6 +212,28 @@
 
 /* mobile */
 @media (max-width: 600px) {
+  .tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    scroll-snap-type: x mandatory;
+    padding-bottom: 5px;
+  }
+
+  .tabs::-webkit-scrollbar {
+    height: 6px;
+  }
+
+  .tabs::-webkit-scrollbar-thumb {
+    background: #ddd;
+    border-radius: 6px;
+  }
+
+  .tabCard {
+    flex: 0 0 160px;
+    height: 70px;
+    scroll-snap-align: start;
+  }
+
   .pagination a {
     min-width: 34px;
     height: 34px;

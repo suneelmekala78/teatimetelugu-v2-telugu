@@ -23,11 +23,6 @@
   font-family: "Mallanna", sans-serif;
 }
 
-.tab:hover {
-  background: red;
-  color: white;
-}
-
 .active {
   background: red;
   color: white;

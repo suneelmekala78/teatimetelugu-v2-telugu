@@ -50,7 +50,8 @@
 }
 
 .links a:hover {
-  color: #f25a23;
+  color: #e04343;
+  text-decoration: underline;
 }
 
 /* ================= BOTTOM ================= */
@@ -67,7 +68,7 @@
 }
 
 .copy {
-  color: #cbd5e1;
+  color: #fff;
 }
 
 .copy a {

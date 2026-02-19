@@ -7,6 +7,8 @@ import Reactions from "@/components/news/reactions/Reactions";
 import SuggestedGallery from "@/components/news/suggestedgallery/SuggestedGallery";
 import { FaCalendarAlt } from "react-icons/fa";
 import CommentsServer from "@/components/news/comments/CommentsServer";
+import ReadButton from "@/components/news/readbutton/ReadButton";
+import NewsShare from "@/components/common/share/NewsShare";
 
 type Props = {
   gallery: any;
@@ -36,9 +38,17 @@ export default function GalleryView({ gallery, suggested }: Props) {
       <div className={styles.left}>
         <h1 className={styles.title}>{gallery?.title?.te}</h1>
 
-        <p className={styles.meta}>
-          <FaCalendarAlt /> {formattedDate}
-        </p>
+        <div className={styles.metaflex}>
+          <div className={styles.meta}>
+            <span>
+              <FaCalendarAlt />
+              {formattedDate}
+            </span>
+            {gallery?.newsAudio?.te && <ReadButton news={gallery} />}
+          </div>
+
+          <NewsShare title={gallery?.title?.te} />
+        </div>
 
         <Image
           src={gallery.galleryPics[0]}

@@ -1,8 +1,14 @@
 import Image from "next/image";
-import Link from "next/link";
 import styles from "./NewsView.module.css";
 import Reactions from "@/components/news/reactions/Reactions";
 import { FaCalendarAlt } from "react-icons/fa";
+import {
+  FaFacebookF,
+  FaWhatsapp,
+  FaInstagram,
+  FaXTwitter,
+  FaShareNodes,
+} from "react-icons/fa6";
 
 import LatestStories from "@/components/common/lateststories/LatestStories";
 import ReadButton from "@/components/news/readbutton/ReadButton";
@@ -10,6 +16,7 @@ import Social from "@/components/news/social/Social";
 import Tags from "@/components/news/tags/Tags";
 import SuggestedNews from "@/components/news/suggestednews/SuggestedNews";
 import CommentsServer from "@/components/news/comments/CommentsServer";
+import NewsShare from "@/components/common/share/NewsShare";
 
 type Props = {
   news: any;
@@ -39,12 +46,16 @@ export default function NewsView({ news, suggested }: Props) {
       <div className={styles.left}>
         <h1 className={styles.title}>{news?.title?.te}</h1>
 
-        <div className={styles.meta}>
-          <span>
-            <FaCalendarAlt />
-            {formattedDate}
-          </span>
-          {news?.newsAudio?.te && <ReadButton news={news} />}
+        <div className={styles.metaflex}>
+          <div className={styles.meta}>
+            <span>
+              <FaCalendarAlt />
+              {formattedDate}
+            </span>
+            {news?.newsAudio?.te && <ReadButton news={news} />}
+          </div>
+
+          <NewsShare title={news?.title?.te} />
         </div>
 
         <div className={styles.imageWrap}>
@@ -74,28 +85,6 @@ export default function NewsView({ news, suggested }: Props) {
         <Tags tags={news?.tags} />
         <Social />
         <LatestStories />
-
-        {suggested.length > 0 && (
-          <>
-            <h3 className={styles.sideTitle}>సూచించబడిన పోస్ట్‌లు</h3>
-
-            {suggested.slice(0, 5).map((item) => (
-              <Link
-                key={item._id}
-                href={`/${item?.category?.en}/${item?.newsId}`}
-                className={styles.suggestCard}
-              >
-                <Image
-                  src={item?.mainUrl}
-                  alt={item?.title?.te}
-                  width={80}
-                  height={60}
-                />
-                <span>{item?.title?.te}</span>
-              </Link>
-            ))}
-          </>
-        )}
       </aside>
     </main>
   );

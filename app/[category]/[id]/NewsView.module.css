@@ -15,10 +15,16 @@
   margin-bottom: 10px;
 }
 
+.metaflex {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  margin-bottom: 5px;
+}
+
 .meta {
-  font-size: 13px;
+  font-size: 14px;
   color: #777;
-  margin-bottom: 10px;
   display: flex;
   align-items: center;
   gap: 10px;
@@ -110,5 +116,15 @@
 
   .content iframe {
     height: 200px;
+  }
+
+  .metaflex {
+    flex-direction: column;
+    gap: 10px;
+  }
+  
+  .meta {
+    width: 100%;
+    justify-content: space-between;
   }
 }

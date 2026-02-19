@@ -69,9 +69,7 @@ export default async function TrendingGrid() {
               {main.category.te} • {formatDate(main.createdAt)}
             </span>
 
-            <h2 className={styles.mainTitle}>
-              {main.title.te}
-            </h2>
+            <h2 className={styles.mainTitle}>{main.title.te}</h2>
           </div>
         </Link>
 
@@ -98,9 +96,7 @@ export default async function TrendingGrid() {
                   {item.category.te} • {formatDate(item.createdAt)}
                 </span>
 
-                <h3 className={styles.title}>
-                  {item.title.te}
-                </h3>
+                <h3 className={styles.title}>{item.title.te}</h3>
               </div>
             </Link>
           ))}

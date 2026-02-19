@@ -1,21 +1,20 @@
 "use client";
 
-import { useRouter, useSearchParams } from "next/navigation";
+import { useSearchParams } from "next/navigation";
 import { useState, useEffect } from "react";
 import { IoSearchOutline } from "react-icons/io5";
 import styles from "./SearchBar.module.css";
 
 type Props = {
   initial?: string;
+  onSearch?: (text: string) => void;
 };
 
-export default function SearchBar({ initial = "" }: Props) {
-  const router = useRouter();
+export default function SearchBar({ initial = "", onSearch }: Props) {
   const params = useSearchParams();
-
   const [text, setText] = useState(initial);
 
-  /* sync when user navigates back/forward */
+  /* Sync when user navigates with browser back/forward */
   useEffect(() => {
     setText(params.get("q") || "");
   }, [params]);
@@ -26,11 +25,11 @@ export default function SearchBar({ initial = "" }: Props) {
     const term = text.trim();
 
     if (!term) {
-      router.push("/search");
+      onSearch?.("");   // let parent clear state
       return;
     }
 
-    router.push(`/search?q=${encodeURIComponent(term)}`);
+    onSearch?.(term);   // 🔥 delegate to SearchClient
   };
 
   return (
@@ -43,7 +42,8 @@ export default function SearchBar({ initial = "" }: Props) {
       />
 
       <button type="submit" className={styles.button}>
-        <IoSearchOutline /> <span>శోధించండి</span>
+        <IoSearchOutline />
+        <span>శోధించండి</span>
       </button>
     </form>
   );

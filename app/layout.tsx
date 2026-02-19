@@ -6,6 +6,7 @@ import Footer from "@/components/common/footer/Footer";
 import NetworkProvider from "@/components/providers/NetworkProvider";
 import AuthBootstrap from "@/components/providers/AuthBootstrap";
 import NavbarWrapper from "@/components/common/navbar/NavbarWrapper";
+import ClientShell from "./ClientShell";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -24,20 +25,19 @@ export default async function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
-  // const user = await getServerUser(); // runs on server
   return (
     <html lang="te">
       <body className={`${geistSans.variable} antialiased`}>
         <Toaster position="top-center" richColors />
         <AuthBootstrap>
-          {/* <HydrateUser user={user}> */}
           <div className="page-container">
             <NavbarWrapper />
-            <NetworkProvider>{children}</NetworkProvider>
+            <NetworkProvider>
+              <ClientShell>{children}</ClientShell>
+            </NetworkProvider>
             <Footer />
           </div>
         </AuthBootstrap>
-        {/* </HydrateUser> */}
       </body>
     </html>
   );

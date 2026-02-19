@@ -12,7 +12,7 @@ import {
 } from "react-icons/fa6";
 
 import { contactUsEmail } from "@/lib/requests-client";
-import { toast } from "react-toastify";
+import { toast } from "sonner";
 import styles from "./contact.module.css";
 
 export default function ContactClient() {
@@ -53,8 +53,10 @@ export default function ContactClient() {
           message: "",
         });
       } else {
-        toast.error(res?.message);
+        toast.error(res?.message || "Something went wrong!");
       }
+    } catch (err) {
+      toast.error("Server Error!");
     } finally {
       setLoading(false);
     }
@@ -70,7 +72,9 @@ export default function ContactClient() {
           <div className={styles.info}>
             <h2>సంప్రదించండి</h2>
 
-            <p>టీ టైమ్ తెలుగు బృందం మీ అభిప్రాయాలు మరియు సూచనలను స్వాగతిస్తుంది.</p>
+            <p>
+              టీ టైమ్ తెలుగు బృందం మీ అభిప్రాయాలు మరియు సూచనలను స్వాగతిస్తుంది.
+            </p>
 
             <div className={styles.contactItem}>
               <FaEnvelope /> <span>info@eagleiitech.com</span>
@@ -81,16 +85,25 @@ export default function ContactClient() {
             </div>
 
             <div className={styles.socials}>
-              <a href="https://facebook.com" target="_blank">
+              <a
+                href="https://www.facebook.com/profile.php?id=61582469079953"
+                target="_blank"
+              >
                 <FaFacebook />
               </a>
-              <a href="https://youtube.com" target="_blank">
+              <a
+                href="https://www.youtube.com/@TeaTimeTelugu-eet"
+                target="_blank"
+              >
                 <FaYoutube />
               </a>
-              <a href="https://x.com" target="_blank">
+              <a href="https://x.com/TeaTimeTelugu" target="_blank">
                 <FaXTwitter />
               </a>
-              <a href="https://instagram.com" target="_blank">
+              <a
+                href="https://www.instagram.com/teatime_telugu/"
+                target="_blank"
+              >
                 <FaInstagram />
               </a>
             </div>

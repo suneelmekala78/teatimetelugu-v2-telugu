@@ -54,46 +54,47 @@ export default function ReadButton({ news }: Props) {
   /* ---------------- play ---------------- */
 
   const handlePlay = async () => {
-    try {
-      setLoading(true);
+  try {
+    if (!audioRef.current) return;
 
-      let audioUrl = src;
+    setLoading(true);
 
-      /* fetch audio only once */
-      if (!audioUrl) {
-        let base64 = news.newsAudio?.te;
-
-        // if (!base64) {
-        //   const res = await getSpeech({
-        //     newsId: news._id,
-        //     text: `<p>శీర్షిక: ${news.title.te}</p>${news.description.en}`,
-        //   });
-
-        //   base64 = res?.audioContent;
-        // }
-
-        if (!base64) {
-          toast.error("Audio unavailable");
-          return;
-        }
-
-        audioUrl = base64ToUrl(base64);
-        setSrc(audioUrl);
-      }
-
-      if (!audioRef.current) return;
-
-      audioRef.current.src = audioUrl;
+    /* ✅ If already paused → resume from same position */
+    if (paused && src) {
       await audioRef.current.play();
-
       setPlaying(true);
       setPaused(false);
-    } catch (err) {
-      toast.error("Failed to play audio");
-    } finally {
-      setLoading(false);
+      return;
     }
-  };
+
+    let audioUrl = src;
+
+    /* ✅ Load audio ONLY first time */
+    if (!audioUrl) {
+      const base64 = news.newsAudio?.te;
+
+      if (!base64) {
+        toast.error("Audio unavailable");
+        return;
+      }
+
+      audioUrl = base64ToUrl(base64);
+      setSrc(audioUrl);
+
+      audioRef.current.src = audioUrl; // set only once
+    }
+
+    await audioRef.current.play();
+
+    setPlaying(true);
+    setPaused(false);
+  } catch {
+    toast.error("Failed to play audio");
+  } finally {
+    setLoading(false);
+  }
+};
+
 
   /* ---------------- pause ---------------- */
 

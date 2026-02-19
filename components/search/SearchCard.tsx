@@ -1,6 +1,5 @@
 import Link from "next/link";
 import Image from "next/image";
-import moment from "moment";
 import { FaPlay } from "react-icons/fa";
 
 import styles from "./SearchCard.module.css";
@@ -8,6 +7,13 @@ import styles from "./SearchCard.module.css";
 type Props = {
   item: any;
 };
+
+const formatDate = (date: string) =>
+  new Date(date).toLocaleDateString("te-IN", {
+    day: "2-digit",
+    month: "long",
+    year: "numeric",
+  });
 
 export default function SearchCard({ item }: Props) {
   const route =
@@ -38,9 +44,7 @@ export default function SearchCard({ item }: Props) {
       </div>
 
       <div className={styles.content}>
-        <span className={styles.date}>
-          {moment(item.createdAt).format("DD MMM YYYY")}
-        </span>
+        <span className={styles.date}>{formatDate(item.createdAt)}</span>
 
         <h3 className={styles.title}>{title}</h3>
       </div>
