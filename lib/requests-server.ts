@@ -17,6 +17,9 @@ export const getTopNinePosts = () =>
 export const getTrendingNews = () =>
   serverFetch("/home/get-trends");
 
+export const getMostviewedNews = () =>
+  serverFetch("/news/trending");
+
 export const getHotTopics = () =>
   serverFetch("/home/get-hot-topics");
 

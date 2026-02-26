@@ -1,6 +1,8 @@
 import styles from "./VideoView.module.css";
 import LatestStories from "@/components/common/lateststories/LatestStories";
 import SectionTitle from "@/components/common/titles/SectionTitle";
+import SmartAdUnit from "@/components/google-ads/SmartAdUnit";
+import AdBlock from "@/components/google-ads/AdBlock";
 import Social from "@/components/news/social/Social";
 import Link from "next/link";
 import { FaCalendarAlt } from "react-icons/fa";
@@ -36,6 +38,12 @@ export default function VideoView({ video, suggested, similar }: Props) {
           <span className={styles.label}>వీడియో:</span>
           {video?.title?.te}
         </h1>
+        {/* DH AD */}
+        <AdBlock>
+          <SmartAdUnit
+            slot="3315432893"
+          />
+        </AdBlock>
 
         <p className={styles.date}>
           <FaCalendarAlt /> {formattedDate}
@@ -69,6 +77,10 @@ export default function VideoView({ video, suggested, similar }: Props) {
             </div>
           </div>
         )}
+        {/* DH AD */}
+        <AdBlock>
+          <SmartAdUnit slot="3315432893" />
+        </AdBlock>
 
         {/* SUGGESTED */}
         {suggested.length > 0 && (
@@ -89,12 +101,24 @@ export default function VideoView({ video, suggested, similar }: Props) {
             </div>
           </div>
         )}
+        {/* MH AD */}
+        <AdBlock>
+          <SmartAdUnit slot="9182003090" />
+        </AdBlock>
       </section>
 
       {/* ===== RIGHT SIDEBAR ===== */}
       <aside className={styles.right}>
         <Social />
+        {/* DS AD */}
+        <AdBlock>
+          <SmartAdUnit slot="9180743912" />
+        </AdBlock>
         <LatestStories />
+        {/* MV AD */}
+        <AdBlock>
+          <SmartAdUnit slot="6909803795" />
+        </AdBlock>
       </aside>
     </main>
   );

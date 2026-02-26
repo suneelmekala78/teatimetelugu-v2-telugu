@@ -1,5 +1,6 @@
 import { getSingleGallery } from "@/lib/requests-server";
 import GalleryView from "./GalleryView";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ id: string }>;
@@ -42,7 +43,7 @@ export default async function Page({ params }: Props) {
     }
   } catch {}
 
-  if (!gallery) return <p style={{ padding: 40 }}>Not found</p>;
+  if (!gallery) notFound();
 
   return <GalleryView gallery={gallery} suggested={suggested} />;
 }

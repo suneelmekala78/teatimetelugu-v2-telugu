@@ -151,3 +151,69 @@
     grid-template-columns: 1fr;
   }
 }
+
+/* ===== Skeleton Loader ===== */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #e5e7eb;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.6),
+    transparent
+  );
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* image placeholder */
+.imageWrap.skeleton {
+  height: 170px;
+}
+
+/* meta line */
+.metaSkeleton {
+  height: 12px;
+  width: 60%;
+  border-radius: 6px;
+  margin-bottom: 10px;
+}
+
+/* title lines */
+.titleSkeleton {
+  height: 16px;
+  width: 100%;
+  border-radius: 6px;
+  margin-bottom: 8px;
+}
+
+.titleSkeleton:last-child {
+  width: 80%;
+}
+
+/* pagination skeleton */
+.pageBtn {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+}
+
+.pageText {
+  width: 120px;
+  height: 18px;
+  border-radius: 8px;
+}

@@ -3,6 +3,8 @@ import Image from "next/image";
 import styles from "./CategoryPosts.module.css";
 import { getCategoryNewsPosts } from "@/lib/requests-server";
 import { FaAngleLeft, FaAngleRight } from "react-icons/fa";
+import SmartAdUnit from "@/components/google-ads/SmartAdUnit";
+import AdBlock from "@/components/google-ads/AdBlock";
 
 const POSTS_PER_PAGE = 16;
 
@@ -85,6 +87,10 @@ export default async function CategoryPosts({
           <p>ఫలితాలు ఏవీ దొరకలేదు!</p>
         )}
       </div>
+      {/* MH AD */}
+      <AdBlock>
+        <SmartAdUnit slot="9182003090" />
+      </AdBlock>
 
       {/* ===== PAGINATION ===== */}
       {totalPages > 1 && (

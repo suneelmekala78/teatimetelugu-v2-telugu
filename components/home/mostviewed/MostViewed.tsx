@@ -1,7 +1,7 @@
 import Link from "next/link";
 import Image from "next/image";
 import SectionTitle from "@/components/common/titles/SectionTitle";
-import { getTrendingNews } from "@/lib/requests-server";
+import { getMostviewedNews } from "@/lib/requests-server";
 import styles from "./MostViewed.module.css";
 
 /* ================= TYPES ================= */
@@ -20,7 +20,7 @@ export default async function MostViewed() {
   let news: NewsItem[] = [];
 
   try {
-    const res = await getTrendingNews();
+    const res = await getMostviewedNews();
 
     if (res?.status === "success") {
       news = res.news?.slice(0, 6);

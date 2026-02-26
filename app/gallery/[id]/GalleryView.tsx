@@ -9,6 +9,8 @@ import { FaCalendarAlt } from "react-icons/fa";
 import CommentsServer from "@/components/news/comments/CommentsServer";
 import ReadButton from "@/components/news/readbutton/ReadButton";
 import NewsShare from "@/components/common/share/NewsShare";
+import SmartAdUnit from "@/components/google-ads/SmartAdUnit";
+import AdBlock from "@/components/google-ads/AdBlock";
 
 type Props = {
   gallery: any;
@@ -37,6 +39,12 @@ export default function GalleryView({ gallery, suggested }: Props) {
       {/* LEFT */}
       <div className={styles.left}>
         <h1 className={styles.title}>{gallery?.title?.te}</h1>
+        {/* DH AD */}
+        <AdBlock>
+          <SmartAdUnit
+            slot="3315432893"
+          />
+        </AdBlock>
 
         <div className={styles.metaflex}>
           <div className={styles.meta}>
@@ -79,13 +87,29 @@ export default function GalleryView({ gallery, suggested }: Props) {
 
         <Reactions newsId={gallery._id} isGallery={true} />
         <CommentsServer newsId={gallery._id} />
+        {/* DH AD */}
+        <AdBlock>
+          <SmartAdUnit slot="3315432893"  />
+        </AdBlock>
         <SuggestedGallery items={suggested} />
+        {/* MH AD */}
+        <AdBlock>
+          <SmartAdUnit slot="9182003090" />
+        </AdBlock>
       </div>
 
       {/* RIGHT */}
       <aside className={styles.right}>
         <Social />
+        {/* DS AD */}
+        <AdBlock>
+          <SmartAdUnit slot="9180743912" />
+        </AdBlock>
         <LatestStories />
+        {/* MV AD */}
+        <AdBlock>
+          <SmartAdUnit slot="6909803795" />
+        </AdBlock>
       </aside>
     </main>
   );

@@ -24,7 +24,7 @@ export default function NewsShare({ title }: Props) {
 
   const shareWhatsapp = () => {
     window.open(
-      `https://wa.me/?text=${encodeURIComponent(title + " " + shareUrl)}`,
+      `https://wa.me/?text=${encodeURIComponent(title + "\n\n" + shareUrl)}`,
       "_blank"
     );
   };

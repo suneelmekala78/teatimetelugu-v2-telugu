@@ -3,6 +3,8 @@ import Image from "next/image";
 import styles from "./Videos.module.css";
 import { getFilteredVideos } from "@/lib/requests-server";
 import { FaAngleLeft, FaAngleRight, FaPlay } from "react-icons/fa";
+import SmartAdUnit from "@/components/google-ads/SmartAdUnit";
+import AdBlock from "@/components/google-ads/AdBlock";
 
 const POSTS_PER_PAGE = 16;
 
@@ -71,7 +73,7 @@ export default async function VideosGrid({ subcategory, page }: Props) {
             <div className={styles.text}>
               <span className={styles.meta}>
                 {video.subCategory?.te || "తాజా వీడియో"} •{" "}
-                  {formatDate(video?.createdAt)}
+                {formatDate(video?.createdAt)}
               </span>
 
               <h3 className={styles.title}>{video.title?.te}</h3>
@@ -79,6 +81,10 @@ export default async function VideosGrid({ subcategory, page }: Props) {
           </Link>
         ))}
       </div>
+      {/* MH AD */}
+      <AdBlock>
+        <SmartAdUnit slot="9182003090" />
+      </AdBlock>
 
       {/* ===== PAGINATION ===== */}
       {totalPages > 1 && (

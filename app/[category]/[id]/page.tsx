@@ -1,6 +1,7 @@
 import { getSingleNews } from "@/lib/requests-server";
 import NewsView from "./NewsView";
 import HydrateReactions from "@/components/providers/HydrateReactions";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{
@@ -46,7 +47,7 @@ export default async function Page({ params }: Props) {
     }
   } catch {}
 
-  if (!news) return <p style={{ padding: 40 }}>Not found</p>;
+  if (!news) notFound();
 
   return (
     <HydrateReactions reactions={news.reactions || []}>

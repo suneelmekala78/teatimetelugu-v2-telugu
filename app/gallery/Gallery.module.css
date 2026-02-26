@@ -1,5 +1,6 @@
 .container {
   margin: auto;
+  padding: 0 10px;
 }
 
 /* ================= CATEGORY ================= */
@@ -150,4 +151,76 @@
   .grid {
     grid-template-columns: repeat(2, 1fr);
   }
+}
+
+/* ================= Skeleton Loader ================= */
+
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #e5e7eb;
+  border-radius: 8px;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255,255,255,0.65),
+    transparent
+  );
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* title placeholder */
+.titleSkeleton {
+  height: 28px;
+  width: 180px;
+  margin: 10px 10px 20px;
+  background: #e5e7eb;
+  border-radius: 6px;
+}
+
+/* category tabs */
+.tabSkeleton {
+  height: 34px;
+  width: 90px;
+}
+
+/* fake image area */
+.imageFake {
+  position: absolute;
+  inset: 0;
+  background: #dfe3e8;
+}
+
+/* gradient title placeholder */
+.nameSkeleton {
+  position: absolute;
+  bottom: 0;
+  width: 100%;
+  height: 40px;
+  background: linear-gradient(to top, #d1d5db, transparent);
+}
+
+/* pagination skeleton */
+.pageBtn {
+  width: 38px;
+  height: 38px;
+}
+
+.pageText {
+  width: 120px;
+  height: 16px;
+  border-radius: 6px;
 }

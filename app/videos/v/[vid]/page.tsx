@@ -1,5 +1,6 @@
 import { getVideo } from "@/lib/requests-server";
 import VideoView from "./VideoView";
+import { notFound } from "next/navigation";
 
 type Props = {
   params: Promise<{ vid: string }>;
@@ -33,7 +34,7 @@ export default async function Page({ params }: Props) {
   const res = await getVideo(vid);
 
   if (!res?.status) {
-    return <p style={{ padding: 40 }}>Video not found</p>;
+    notFound();
   }
 
   return (

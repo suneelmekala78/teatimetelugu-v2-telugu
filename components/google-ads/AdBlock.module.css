@@ -1,0 +1,12 @@
+.block {
+  width: 100%;
+  margin: 28px 0;
+  display: block;
+  text-align: center;
+  background-color: rgba(244, 242, 242, 0.5);
+}
+
+/* Prevent layout overflow without touching Google styles */
+.block > div {
+  width: 100%;
+}

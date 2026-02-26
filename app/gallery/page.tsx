@@ -7,6 +7,8 @@ import { time } from "console";
 import GalleryTabs from "./GalleryTabs";
 import { FaAngleLeft } from "react-icons/fa6";
 import { FaAngleRight } from "react-icons/fa";
+import SmartAdUnit from "@/components/google-ads/SmartAdUnit";
+import AdBlock from "@/components/google-ads/AdBlock";
 
 const POSTS_PER_PAGE = 16;
 
@@ -24,7 +26,7 @@ export const metadata = {
 
 /* ================= PAGE ================= */
 export default async function GalleryPage({ searchParams }: Props) {
-  const query = await searchParams;   // ⭐ MUST
+  const query = await searchParams; // ⭐ MUST
 
   const page = Number(query.page) || 1;
   const subcategory = query.subcategory || "";
@@ -85,6 +87,10 @@ export default async function GalleryPage({ searchParams }: Props) {
           <p className={styles.empty}>గ్యాలరీలో పోస్ట్‌లు అందుబాటులో లేవు.</p>
         )}
       </div>
+      {/* MH AD */}
+      <AdBlock>
+        <SmartAdUnit slot="9182003090" />
+      </AdBlock>
 
       {/* ===== PAGINATION ===== */}
       {totalPages > 1 && (
