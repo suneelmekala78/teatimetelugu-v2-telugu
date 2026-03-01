@@ -93,6 +93,7 @@ export const getSearchNews = (
 ) =>
   serverFetch("/news/search", {
     params: { query, page, limit, type },
+    revalidate: 0,
   });
 
 /* ================= REACTIONS ================= */

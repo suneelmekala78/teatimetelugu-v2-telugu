@@ -18,8 +18,12 @@ export default async function SearchPage({ searchParams }: Props) {
   if (query.length >= 3) {
     try {
       const res = await getSearchNews(query, 1); // only page 1
-      initialItems = res?.results || [];
-      initialPagination = res?.pagination || {};
+      if (res?.status === "success") {
+        initialItems = res?.results || [];
+        initialPagination = res?.pagination || {};
+      } else {
+        failed = true;
+      }
     } catch {
       failed = true;
     }

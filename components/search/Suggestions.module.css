@@ -1,15 +1,41 @@
 .wrapper {
-  margin-top: 20px;
+  margin: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  padding: 20px;
+  border-radius: 10px;
+  background: #f8f9fa;
+  border: 1px solid #eceef1;
+}
+
+.title {
+  margin: 0;
+  color: #374151;
+  font-size: 14px;
+  font-weight: 700;
+}
+
+.tags {
   display: flex;
   gap: 10px;
   flex-wrap: wrap;
-  padding: 20px;
 }
 
 .wrapper button {
-  padding: 6px 14px;
+  padding: 7px 14px;
   border-radius: 20px;
-  background: #eee;
-  border: none;
+  background: #fff;
+  border: 1px solid #ddd;
   cursor: pointer;
+  color: #374151;
+  font-size: 16px;
+  font-weight: 600;
+  transition: all 0.2s ease;
+  font-family: "Mallanna", sans-serif;
+}
+
+.wrapper button:hover {
+  background: #eef2ff;
+  border-color: #c7d2fe;
 }

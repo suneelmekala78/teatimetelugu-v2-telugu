@@ -1,5 +1,8 @@
 .text {
   text-align: center;
-  margin-top: 40px;
-  color: #777;
+  margin: 20px 0;
+  color: #666;
+  background: #f8f9fa;
+  border-radius: 8px;
+  padding: 16px;
 }
