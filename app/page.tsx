@@ -32,6 +32,9 @@ import {
   MovieTableSkeleton,
 } from "@/components/home/skeletons/HomeSectionSkeletons";
 
+// Skip static generation — news homepage must render at request time
+export const dynamic = "force-dynamic";
+
 export default async function Home() {
   // Single DB query for all Home-model data (breakingNews, trends, hotTopics, movies)
   const homeData = await getHomePageData();

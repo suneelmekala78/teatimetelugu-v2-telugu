@@ -27,6 +27,7 @@ export default async function MoreStories() {
       writer: "",
       page: 2,
       limit: 12,
+      skipCount: "true",
     });
 
     if (res?.status === "success") {
