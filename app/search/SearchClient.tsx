@@ -2,7 +2,7 @@
 
 import { useEffect, useState, useTransition } from "react";
 import { useRouter } from "next/navigation";
-import { getSearchNews } from "@/lib/requests-server";
+import { api } from "@/lib/api";
 
 import styles from "./page.module.css";
 import Suggestions from "@/components/search/Suggestions";
@@ -99,7 +99,9 @@ export default function SearchClient({
 
     try {
       setIsLoadingMore(true);
-      const res = await getSearchNews(query, nextPage, limit);
+      const res: any = await api({
+        url: `/news/search?query=${encodeURIComponent(query)}&page=${nextPage}&limit=${limit}&type=all`,
+      });
 
       if (res?.status !== "success") {
         setHasFailed(true);

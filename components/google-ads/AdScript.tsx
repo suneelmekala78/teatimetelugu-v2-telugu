@@ -6,7 +6,7 @@ export default function AdScript() {
   return (
     <Script
       id="adsense-script"
-      strategy="afterInteractive"
+      strategy="lazyOnload"
       async
       src={`https://pagead2.googlesyndication.com/pagead/js/adsbygoogle.js?client=${process.env.NEXT_PUBLIC_ADSENSE_CLIENT}`}
       crossOrigin="anonymous"

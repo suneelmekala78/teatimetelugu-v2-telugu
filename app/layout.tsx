@@ -1,5 +1,4 @@
 import type { Metadata, Viewport } from "next";
-import { Geist } from "next/font/google";
 import { Toaster } from "sonner";
 import "./globals.css";
 import Footer from "@/components/common/footer/Footer";
@@ -22,11 +21,6 @@ const SITE_DESCRIPTION =
 const SITE_VERIFICATION =
   process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION ||
   "n5Z9FmEzjRRyrO9W7lvdr_Hh1NAxDbebpBW1J1OmadY";
-
-const geistSans = Geist({
-  variable: "--font-geist-sans",
-  subsets: ["latin"],
-});
 
 export const metadata: Metadata = {
   metadataBase: new URL(SITE_BASE),
@@ -72,7 +66,7 @@ export default async function RootLayout({
 }>) {
   return (
     <html lang="te">
-      <body className={`${geistSans.variable} antialiased`}>
+      <body className="antialiased">
         <GoogleAnalytics />
         <AdScript />
         <Toaster position="top-center" richColors />

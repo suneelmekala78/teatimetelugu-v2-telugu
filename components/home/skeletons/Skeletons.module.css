@@ -1,0 +1,264 @@
+.sectionSkeleton {
+  max-width: 1300px;
+  margin: 0 auto 24px;
+  padding: 0 16px;
+}
+
+/* ===== Shared Shimmer ===== */
+.skeleton {
+  position: relative;
+  overflow: hidden;
+  background: #e5e7eb;
+  border-radius: 8px;
+}
+
+.skeleton::after {
+  content: "";
+  position: absolute;
+  inset: 0;
+  transform: translateX(-100%);
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.5),
+    transparent
+  );
+  animation: shimmer 1.2s infinite;
+}
+
+@keyframes shimmer {
+  100% {
+    transform: translateX(100%);
+  }
+}
+
+/* ===== Breaking News ===== */
+.breakingRow {
+  display: flex;
+  gap: 12px;
+  overflow: hidden;
+}
+
+.breakingCard {
+  min-width: 200px;
+  height: 120px;
+  flex-shrink: 0;
+}
+
+/* ===== News Grid (Featured, MoreStories, OtherPosts) ===== */
+.newsGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.newsCard {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.newsImage {
+  height: 160px;
+  width: 100%;
+}
+
+.newsLine {
+  height: 14px;
+  width: 80%;
+}
+
+.newsLineShort {
+  height: 12px;
+  width: 50%;
+}
+
+/* ===== Trending (Big + List) ===== */
+.trendingGrid {
+  display: grid;
+  grid-template-columns: 1.2fr 1fr;
+  gap: 16px;
+}
+
+.trendingBig {
+  height: 300px;
+}
+
+.trendingList {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.trendingItem {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+}
+
+.trendingThumb {
+  width: 90px;
+  height: 65px;
+  flex-shrink: 0;
+}
+
+.trendingText {
+  flex: 1;
+  height: 14px;
+}
+
+/* ===== Gallery ===== */
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.galleryCard {
+  height: 200px;
+}
+
+/* ===== Most Viewed ===== */
+.mvGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 14px;
+}
+
+.mvCard {
+  height: 180px;
+}
+
+/* ===== Reviews ===== */
+.reviewsGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 14px;
+}
+
+.reviewCard {
+  height: 200px;
+}
+
+/* ===== Category Top ===== */
+.catSection {
+  margin-bottom: 20px;
+}
+
+.catTitle {
+  height: 20px;
+  width: 120px;
+  margin-bottom: 12px;
+}
+
+.catGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 12px;
+}
+
+.catCard {
+  display: flex;
+  gap: 10px;
+}
+
+.catThumb {
+  width: 100px;
+  height: 70px;
+  flex-shrink: 0;
+}
+
+.catText {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.catLine {
+  height: 12px;
+  width: 90%;
+}
+
+/* ===== Video Gallery ===== */
+.videoSection {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr;
+  gap: 14px;
+}
+
+.videoPlayer {
+  height: 280px;
+}
+
+.videoList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.videoItem {
+  display: flex;
+  gap: 8px;
+}
+
+.videoThumb {
+  width: 100px;
+  height: 60px;
+  flex-shrink: 0;
+}
+
+.videoText {
+  flex: 1;
+  height: 12px;
+}
+
+/* ===== Movie Tables ===== */
+.movieTable {
+  height: 200px;
+  width: 100%;
+}
+
+/* ===== Section Title ===== */
+.titleBar {
+  height: 24px;
+  width: 160px;
+  margin-bottom: 14px;
+}
+
+/* ===== Responsive ===== */
+@media (max-width: 900px) {
+  .newsGrid {
+    grid-template-columns: 1fr;
+  }
+  .trendingGrid {
+    grid-template-columns: 1fr;
+  }
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .mvGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .reviewsGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+  .catGrid {
+    grid-template-columns: 1fr;
+  }
+  .videoSection {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 600px) {
+  .galleryGrid {
+    grid-template-columns: 1fr;
+  }
+  .mvGrid {
+    grid-template-columns: 1fr;
+  }
+  .reviewsGrid {
+    grid-template-columns: 1fr;
+  }
+}

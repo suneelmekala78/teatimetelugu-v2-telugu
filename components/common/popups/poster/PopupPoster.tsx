@@ -6,7 +6,7 @@ import { IoClose } from "react-icons/io5";
 import { toast } from "sonner";
 
 import styles from "./PopupPoster.module.css";
-import { getPopupPoster } from "@/lib/requests-server";
+import { api } from "@/lib/api";
 
 interface Props {
   closePopup: () => void;
@@ -21,7 +21,7 @@ export default function PopupPoster({ closePopup }: Props) {
   useEffect(() => {
     const fetchPoster = async () => {
       try {
-        const res = await getPopupPoster();
+        const res: any = await api({ url: "/home/get-popup-poster" });
 
         if (res?.status === "success") {
           setImg(res.popupPoster?.img || "");

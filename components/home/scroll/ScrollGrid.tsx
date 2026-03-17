@@ -11,16 +11,22 @@ interface NewsItem {
   category: { en: string };
 }
 
-export default async function ScrollGrid() {
-  let topics: NewsItem[] = [];
+interface Props {
+  news?: NewsItem[];
+}
 
-  try {
-    const res = await getHotTopics();
-    if (res?.status === "success") {
-      topics = res.news;
+export default async function ScrollGrid({ news: propNews }: Props) {
+  let topics: NewsItem[] = propNews || [];
+
+  if (!propNews) {
+    try {
+      const res = await getHotTopics();
+      if (res?.status === "success") {
+        topics = res.news;
+      }
+    } catch {
+      topics = [];
     }
-  } catch {
-    topics = [];
   }
 
   if (!topics.length) return null;

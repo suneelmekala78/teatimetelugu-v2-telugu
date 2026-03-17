@@ -3,17 +3,22 @@ import Image from "next/image";
 import styles from "./BreakingNews.module.css";
 import { getBreakingNews } from "@/lib/requests-server";
 
-export default async function BreakingNews() {
-  let news: any[] = [];
+interface Props {
+  news?: any[];
+}
+
+export default async function BreakingNews({ news: propNews }: Props) {
+  let news: any[] = propNews || [];
   let error = false;
 
-  try {
-    const res = await getBreakingNews();
-
-    news =
-      res?.status === "success" && Array.isArray(res?.news) ? res.news : [];
-  } catch {
-    error = true;
+  if (!propNews) {
+    try {
+      const res = await getBreakingNews();
+      news =
+        res?.status === "success" && Array.isArray(res?.news) ? res.news : [];
+    } catch {
+      error = true;
+    }
   }
 
   const loading = !news.length && !error;
@@ -48,7 +53,6 @@ export default async function BreakingNews() {
                     fill
                     sizes="150px"
                     className={styles.image}
-                    priority
                   />
                 </figure>
 

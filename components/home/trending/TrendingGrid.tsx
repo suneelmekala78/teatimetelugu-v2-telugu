@@ -26,16 +26,22 @@ const formatDate = (date: string) =>
 
 /* ================= SERVER COMPONENT ================= */
 
-export default async function TrendingGrid() {
-  let news: NewsItem[] = [];
+interface Props {
+  news?: NewsItem[];
+}
 
-  try {
-    const res = await getTrendingNews();
-    if (res?.status === "success") {
-      news = res.news;
+export default async function TrendingGrid({ news: propNews }: Props) {
+  let news: NewsItem[] = propNews || [];
+
+  if (!propNews) {
+    try {
+      const res = await getTrendingNews();
+      if (res?.status === "success") {
+        news = res.news;
+      }
+    } catch {
+      news = [];
     }
-  } catch {
-    news = [];
   }
 
   if (!news.length) return null;

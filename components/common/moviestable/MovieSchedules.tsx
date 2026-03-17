@@ -1,15 +1,21 @@
 import MovieTabsTableClient from "./MovieTabsTableClient";
 import { getMovieReleases } from "@/lib/requests-server";
 
-export default async function MovieSchedules() {
-  let rows: any[] = [];
+interface Props {
+  rows?: any[];
+}
 
-  try {
-    const res = await getMovieReleases();
-    if (res?.status === "success") {
-      rows = res.movieReleases || [];
-    }
-  } catch {}
+export default async function MovieSchedules({ rows: propRows }: Props) {
+  let rows: any[] = propRows || [];
+
+  if (!propRows) {
+    try {
+      const res = await getMovieReleases();
+      if (res?.status === "success") {
+        rows = res.movieReleases || [];
+      }
+    } catch {}
+  }
 
   return (
     <MovieTabsTableClient

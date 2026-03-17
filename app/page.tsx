@@ -1,3 +1,4 @@
+import { Suspense } from "react";
 import "@/components/home/home.css";
 import FeaturedGrid from "@/components/home/featured/FeaturedGrid";
 import ScrollGrid from "@/components/home/scroll/ScrollGrid";
@@ -15,19 +16,42 @@ import Discover from "@/components/common/discover/Discover";
 import BreakingNews from "@/components/common/breakingnews/BreakingNews";
 import SmartAdUnit from "@/components/google-ads/SmartAdUnit";
 import AdBlock from "@/components/google-ads/AdBlock";
+import { getHomePageData } from "@/lib/requests-server";
+import {
+  BreakingNewsSkeleton,
+  FeaturedSkeleton,
+  TrendingSkeleton,
+  ScrollSkeleton,
+  GallerySkeleton,
+  MostViewedSkeleton,
+  ReviewsSkeleton,
+  CategoryTopSkeleton,
+  VideoGallerySkeleton,
+  MoreStoriesSkeleton,
+  OtherPostsSkeleton,
+  MovieTableSkeleton,
+} from "@/components/home/skeletons/HomeSectionSkeletons";
 
-export default function Home() {
+export default async function Home() {
+  // Single DB query for all Home-model data (breakingNews, trends, hotTopics, movies)
+  const homeData = await getHomePageData();
+
   return (
     <div className="home-page">
-      <BreakingNews />
-      <FeaturedGrid />
+      <BreakingNews news={homeData?.breakingNews} />
+
+      <Suspense fallback={<FeaturedSkeleton />}>
+        <FeaturedGrid />
+      </Suspense>
+
       {/* DH AD */}
       <AdBlock>
         <SmartAdUnit slot="3315432893" />
       </AdBlock>
+
       <div className="duo-content">
         <div className="duo-content-left">
-          <TrendingGrid />
+          <TrendingGrid news={homeData?.trends} />
           {/* DH AD */}
           <AdBlock>
             <SmartAdUnit slot="3315432893" style={{ height: "150px" }} />
@@ -38,51 +62,88 @@ export default function Home() {
           <AdBlock>
             <SmartAdUnit slot="9180743912" />
           </AdBlock>
-          <ScrollGrid />
+          <ScrollGrid news={homeData?.hotTopics} />
         </div>
       </div>
-      <GalleryGrid />
+
+      <Suspense fallback={<GallerySkeleton />}>
+        <GalleryGrid />
+      </Suspense>
+
       {/* DH AD */}
       <AdBlock>
         <SmartAdUnit slot="3315432893" />
       </AdBlock>
-      <MostViewed />
-      <ReviewsGrid />
+
+      <Suspense fallback={<MostViewedSkeleton />}>
+        <MostViewed />
+      </Suspense>
+
+      <Suspense fallback={<ReviewsSkeleton />}>
+        <ReviewsGrid />
+      </Suspense>
+
       {/* DH AD */}
       <AdBlock>
         <SmartAdUnit slot="3315432893" style={{ height: "150px" }} />
       </AdBlock>
-      <CategoryTopGrid />
-      <VideoGallery
-        title="కొత్త ట్రైలర్లు"
-        nav="/videos?subcategory=trailers"
-        subcategory="trailers"
-      />
+
+      <Suspense fallback={<CategoryTopSkeleton />}>
+        <CategoryTopGrid />
+      </Suspense>
+
+      <Suspense fallback={<VideoGallerySkeleton />}>
+        <VideoGallery
+          title="కొత్త ట్రైలర్లు"
+          nav="/videos?subcategory=trailers"
+          subcategory="trailers"
+        />
+      </Suspense>
+
       {/* DH AD */}
       <AdBlock>
         <SmartAdUnit slot="3315432893" style={{ height: "150px" }} />
       </AdBlock>
-      <MoreStories />
-      <OtherPosts category="technology" />
+
+      <Suspense fallback={<MoreStoriesSkeleton />}>
+        <MoreStories />
+      </Suspense>
+
+      <Suspense fallback={<OtherPostsSkeleton />}>
+        <OtherPosts category="technology" />
+      </Suspense>
+
       {/* DH AD */}
       <AdBlock>
         <SmartAdUnit slot="3315432893" style={{ height: "150px" }} />
       </AdBlock>
-      <OtherPosts category="business" />
-      <OtherPosts category="health" />
-      <VideoGallery
-        title="లిరికల్ సాంగ్స్"
-        nav="/videos?subcategory=lyrical_songs"
-        subcategory="lyrical_songs"
-      />
+
+      <Suspense fallback={<OtherPostsSkeleton />}>
+        <OtherPosts category="business" />
+      </Suspense>
+
+      <Suspense fallback={<OtherPostsSkeleton />}>
+        <OtherPosts category="health" />
+      </Suspense>
+
+      <Suspense fallback={<VideoGallerySkeleton />}>
+        <VideoGallery
+          title="లిరికల్ సాంగ్స్"
+          nav="/videos?subcategory=lyrical_songs"
+          subcategory="lyrical_songs"
+        />
+      </Suspense>
+
       <div className="movies-tables-section">
-        <MovieSchedules />
-        <MovieCollections />
+        <MovieSchedules rows={homeData?.movieReleases} />
+        <MovieCollections rows={homeData?.movieCollections} />
       </div>
+
       {/* MH AD */}
       <AdBlock>
         <SmartAdUnit slot="9182003090" />
       </AdBlock>
+
       <Discover />
     </div>
   );

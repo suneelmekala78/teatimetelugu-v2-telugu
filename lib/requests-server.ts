@@ -1,5 +1,6 @@
 // lib/requests-server.ts
 import { serverFetch } from "./server-fetch";
+import { publicFetch } from "./server-fetch-public";
 
 /* ================= AUTH ================= */
 
@@ -8,82 +9,85 @@ export const getLoggedInUser = () =>
 
 /* ================= HOME ================= */
 
+export const getHomePageData = () =>
+  publicFetch("/home/home-page-data");
+
 export const getHomeGridPosts = () =>
-  serverFetch("/home/get-featured-posts");
+  publicFetch("/home/get-featured-posts");
 
 export const getTopNinePosts = () =>
-  serverFetch("/home/get-top-nine");
+  publicFetch("/home/get-top-nine");
 
 export const getTrendingNews = () =>
-  serverFetch("/home/get-trends");
+  publicFetch("/home/get-trends");
 
 export const getMostviewedNews = () =>
-  serverFetch("/news/trending");
+  publicFetch("/news/trending");
 
 export const getHotTopics = () =>
-  serverFetch("/home/get-hot-topics");
+  publicFetch("/home/get-hot-topics");
 
 export const getBreakingNews = () =>
-  serverFetch("/home/get-breaking-news");
+  publicFetch("/home/get-breaking-news");
 
 export const getCategoryTopPosts = (category: string) =>
-  serverFetch("/home/get-category-top", {
+  publicFetch("/home/get-category-top", {
     params: { category },
   });
 
 export const getMovieReleases = () =>
-  serverFetch("/home/get-movie-releases");
+  publicFetch("/home/get-movie-releases");
 
 export const getMovieCollections = () =>
-  serverFetch("/home/get-movie-collections");
+  publicFetch("/home/get-movie-collections");
 
 /* ================= ADS ================= */
 
 export const getPopupPoster = () =>
-  serverFetch("/home/get-popup-poster");
+  publicFetch("/home/get-popup-poster");
 
 export const getMoviePoster = () =>
-  serverFetch("/home/get-movie-poster");
+  publicFetch("/home/get-movie-poster");
 
 export const getNavbarAd = () =>
-  serverFetch("/home/get-navbar-ad");
+  publicFetch("/home/get-navbar-ad");
 
 export const getHomeLongAd = () =>
-  serverFetch("/home/get-home-long-ad");
+  publicFetch("/home/get-home-long-ad");
 
 export const getHomeShortAd = () =>
-  serverFetch("/home/get-home-short-ad");
+  publicFetch("/home/get-home-short-ad");
 
 export const getCategoryLongAd = () =>
-  serverFetch("/home/get-category-long-ad");
+  publicFetch("/home/get-category-long-ad");
 
 export const getCategoryShortAd = () =>
-  serverFetch("/home/get-category-short-ad");
+  publicFetch("/home/get-category-short-ad");
 
 export const getNewsLongAd = () =>
-  serverFetch("/home/get-news-long-ad");
+  publicFetch("/home/get-news-long-ad");
 
 export const getNewsShortAd = () =>
-  serverFetch("/home/get-news-short-ad");
+  publicFetch("/home/get-news-short-ad");
 
 /* ================= NEWS ================= */
 
 export const getLatestNews = () =>
-  serverFetch("/news/latest", { revalidate: 120 });
+  publicFetch("/news/latest", { revalidate: 120 });
 
 export const getFilteredNews = (params: Record<string, any>) =>
-  serverFetch("/news/filter", {
+  publicFetch("/news/filter", {
     params,
   });
 
 export const getCategoryNewsPosts = (params: Record<string, any>) =>
-  serverFetch("/news/category", {
+  publicFetch("/news/category", {
     params,
     revalidate: 120,
   });
 
 export const getSingleNews = (id: string) =>
-  serverFetch(`/news/n/${id}`, { revalidate: 300 });
+  publicFetch(`/news/n/${id}`, { revalidate: 300 });
 
 export const getSearchNews = (
   query: string,
@@ -91,7 +95,7 @@ export const getSearchNews = (
   limit = 9,
   type = "all"
 ) =>
-  serverFetch("/news/search", {
+  publicFetch("/news/search", {
     params: { query, page, limit, type },
     revalidate: 0,
   });
@@ -112,19 +116,19 @@ export const getNewsComments = (id: string) =>
 /* ================= GALLERY ================= */
 
 export const getFilteredGallery = (params: Record<string, any>) =>
-  serverFetch("/gallery/filter", {
+  publicFetch("/gallery/filter", {
     params,
   });
 
 export const getSingleGallery = (id: string) =>
-  serverFetch(`/gallery/g/${id}`);
+  publicFetch(`/gallery/g/${id}`);
 
 /* ================= VIDEOS ================= */
 
 export const getFilteredVideos = (params: Record<string, any>) =>
-  serverFetch("/videos/filter", {
+  publicFetch("/videos/filter", {
     params,
   });
 
 export const getVideo = (id: string) =>
-  serverFetch(`/videos/v/${id}`);
+  publicFetch(`/videos/v/${id}`);
