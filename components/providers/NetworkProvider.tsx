@@ -14,8 +14,8 @@ export default function NetworkProvider({
     const goOffline = () => setOffline(true);
     const goOnline = () => setOffline(false);
 
-    setOffline(!navigator.onLine);
-
+    // Only listen for actual offline/online events — don't check navigator.onLine
+    // on mount, as it's unreliable and can falsely report offline
     window.addEventListener("offline", goOffline);
     window.addEventListener("online", goOnline);
 
